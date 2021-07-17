@@ -1,0 +1,38 @@
+@inject Nop.Core.Domain.Common.AdminAreaSettings adminAreaSettings
+@using Nop.Plugin.CustomPoint.ManageCustom.Models
+@using Nop.Web.Framework.Models.DataTables
+@model ManageCustomSearchModel
+@{
+    Layout = "_ConfigurePlugin";
+}
+
+<form asp-controller="ManageCustom" asp-action="List" method="post" id="manage-custom-form">
+    <div class="cards-group">
+        <div class="card card-default">
+            <div class="card-body">
+                @await Html.PartialAsync("Table", new DataTablesModel
+           {
+               Name = "custom-grid",
+               UrlRead = new DataUrl("List", "ManageCustom", null),
+               UrlDelete = new DataUrl("Delete", "ManageCustom", null),
+               Length = Model.PageSize,
+               LengthMenu = Model.AvailablePageSizes,
+               ColumnCollection = new List<ColumnProperty>
+                {
+                    new ColumnProperty(nameof(ManageCustomModel.CustomerName))
+                    {
+                        Title = T("CustomName").Text,
+                        Width = "500"
+                    },
+                    new ColumnProperty(nameof(ManageCustomModel.Email))
+                    {
+                        Title = T("Email").Text,
+                        Width = "500"
+                    }
+                }
+           })
+            </div>
+
+        </div>
+    </div>
+</form>
