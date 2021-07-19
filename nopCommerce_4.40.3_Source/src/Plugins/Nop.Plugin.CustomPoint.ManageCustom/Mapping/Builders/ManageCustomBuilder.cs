@@ -1,4 +1,6 @@
 using FluentMigrator.Builders.Create.Table;
+using FluentMigrator.SqlServer;
+using FluentMigrator.Runner.Extensions;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Customers;
 using Nop.Data.Mapping.Builders;
@@ -17,7 +19,7 @@ namespace Nop.Plugin.CustomPoint.ManageCustom.Mapping.Builders
         public override void MapEntity(CreateTableExpressionBuilder table)
         {
             //map the primary key (not necessary if it is Id field)
-            table.WithColumn(nameof(ManagePointCustom.CustomerId)).AsInt32().PrimaryKey()
+            table.WithColumn(nameof(ManagePointCustom.Id)).AsInt32().Identity().PrimaryKey()
             //avoiding truncation/failure
             //so we set the same max length used in the product name
             .WithColumn(nameof(ManagePointCustom.CustomerName)).AsString(200)

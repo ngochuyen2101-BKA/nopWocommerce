@@ -7,7 +7,6 @@ namespace Nop.Plugin.CustomPoint.ManageCustom.Domain
     /// </summary>
     public partial class ManagePointCustom : BaseEntity
     {
-        public int CustomerId { get; set; }
         public string CustomerName { get; set; }
         public string Email { get; set; }
     }

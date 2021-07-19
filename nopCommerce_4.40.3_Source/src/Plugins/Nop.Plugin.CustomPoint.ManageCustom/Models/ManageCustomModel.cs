@@ -11,6 +11,6 @@ namespace Nop.Plugin.CustomPoint.ManageCustom.Models
         [NopResourceDisplayName("Plugin.CustomPoint.ManageCustom.Fields.CustomerName")]
         public string CustomerName { get; set; }
         [NopResourceDisplayName("Plugin.CustomPoint.ManageCustom.Fields.Email")]
-        public string Email { get; set; }
+        public string Email { get; set; } 
     }
 }

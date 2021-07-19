@@ -31,10 +31,6 @@ namespace Nop.Plugin.CustomPoint.ManageCustom.Services
         {
             var rez = await _manageCustomRepository.GetAllAsync(query =>
             {
-                // if (storeId > 0)
-                //     query = query.Where(point.StoreId == 0);
-                // query = query.OrderBy(point => point.DisplayOrder).ThenBy(point => point.Name);
-
                 return query;
             });
 

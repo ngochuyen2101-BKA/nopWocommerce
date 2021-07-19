@@ -1,0 +1,24 @@
+﻿@model Nop.Plugin.CustomPoint.ManageCustom.Models.ManageCustomModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminPopupLayout.cshtml";
+}
+
+<form asp-controller="ManageCustom" asp-action="Create">
+    <div class="content-header clearfix">
+        <h1 class="float-left">
+            @T("AddNew")
+        </h1>
+        <div class="float-right">
+            <button type="submit" name="save" class="btn btn-primary">
+                <i class="far fa-save"></i>
+                @T("Save")
+            </button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="form-horizontal">
+            @await Html.PartialAsync("~/Plugins/CustomPoint.ManageCustom/Views/_CreateOrUpdate.cshtml")
+        </div>
+    </div>
+</form>

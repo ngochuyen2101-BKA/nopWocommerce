@@ -11,28 +11,43 @@
         <div class="card card-default">
             <div class="card-body">
                 @await Html.PartialAsync("Table", new DataTablesModel
-           {
-               Name = "custom-grid",
-               UrlRead = new DataUrl("List", "ManageCustom", null),
-               UrlDelete = new DataUrl("Delete", "ManageCustom", null),
-               Length = Model.PageSize,
-               LengthMenu = Model.AvailablePageSizes,
-               ColumnCollection = new List<ColumnProperty>
                 {
-                    new ColumnProperty(nameof(ManageCustomModel.CustomerName))
+                    Name = "custom-grid",
+                    UrlRead = new DataUrl("List", "ManageCustom", null),
+                    UrlDelete = new DataUrl("Delete", "ManageCustom", null),
+                    Length = Model.PageSize,
+                    LengthMenu = Model.AvailablePageSizes,
+                    ColumnCollection = new List<ColumnProperty>
                     {
-                        Title = T("CustomName").Text,
-                        Width = "500"
-                    },
-                    new ColumnProperty(nameof(ManageCustomModel.Email))
-                    {
-                        Title = T("Email").Text,
-                        Width = "500"
+                        new ColumnProperty(nameof(ManageCustomModel.CustomerName))
+                        {
+                            Title = T("CustomName").Text,
+                            Width = "500"
+                        },
+                        new ColumnProperty(nameof(ManageCustomModel.Email))
+                        {
+                            Title = T("Email").Text,
+                            Width = "500"
+                        },
+                        new ColumnProperty(nameof(ManageCustomModel.Id))
+                        {
+                            Title = T("Edit").Text,
+                            ClassName = NopColumnClassDefaults.Button,
+                            Width = "100",
+                            Render = new RenderCustom("renderColumnEdit")
+                        }
                     }
-                }
-           })
+                })
             </div>
-
+            <script>
+                function renderColumnEdit(data, type, row, meta) {
+                    return '<button onclick=\"javascript:OpenWindow(\'@Url.Content("~/Admin/PickupInStore/Edit/")' + data + 
+                    ', 800, 800, true); return false;\" class="btn btn-default"><i class="fas fa-pencil-alt"></i>@T("Admin.Common.Edit").Text</button>';
+                }
+            </script>
+            <div class="card-footer">
+                <button type="submit" id="btnAddNewOption" name="save" class="btn btn-primary" onclick="javascript:OpenWindow('@(Url.Action("Create", "ManageCustom"))', 800, 800, true); return false;">@T("AddNew")</button>
+            </div>
         </div>
     </div>
 </form>

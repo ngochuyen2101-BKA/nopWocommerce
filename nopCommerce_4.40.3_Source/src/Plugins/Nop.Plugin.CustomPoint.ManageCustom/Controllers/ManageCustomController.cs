@@ -31,7 +31,7 @@ namespace Nop.Plugin.CustomPoint.ManageCustom.Controllers
             IStoreService storeService) {
                 _localizationService = localizationService;
                 _manageCustomModelFactory = manageCustomModelFactory;
-                _manageCustomService = _manageCustomService;
+                _manageCustomService = manageCustomService;
                 _storeService = storeService;
         }
 
@@ -49,11 +49,17 @@ namespace Nop.Plugin.CustomPoint.ManageCustom.Controllers
             return Json(model);
         }
 
+        public async Task<IActionResult> Create()
+        {
+            return View("~/Plugins/CustomPoint.ManageCustom/Views/Create.cshtml");
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(ManageCustomModel model)
         {
             var custom = new ManagePointCustom
             {
+                // CustomerId = model.Id,
                 CustomerName = model.CustomerName,
                 Email = model.Email
             };
@@ -61,7 +67,23 @@ namespace Nop.Plugin.CustomPoint.ManageCustom.Controllers
 
             ViewBag.RefreshPage = true;
 
-            return View("~/Plugins/Pickup.PickupInStore/Views/Create.cshtml", model);
+            return View("~/Plugins/CustomPoint.ManageCustom/Views/Create.cshtml", model);
+        }
+        
+        public async Task<IActionResult> Edit(int id)
+        {
+            var customer = await _manageCustomService.GetCustomByIdAsync(id);
+            if (customer == null)
+                return RedirectToAction("List");
+
+            var model = new ManagePointCustom
+            {
+                Id = customer.Id,
+                CustomerName = customer.CustomerName,
+                Email = customer.Email,
+            };
+
+            return View("~/Plugins/Pickup.PickupInStore/Views/Edit.cshtml", model);
         }
 
         [HttpPost]
