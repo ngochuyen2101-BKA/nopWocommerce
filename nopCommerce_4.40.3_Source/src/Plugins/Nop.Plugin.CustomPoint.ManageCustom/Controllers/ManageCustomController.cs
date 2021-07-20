@@ -51,7 +51,9 @@ namespace Nop.Plugin.CustomPoint.ManageCustom.Controllers
 
         public async Task<IActionResult> Create()
         {
-            return View("~/Plugins/CustomPoint.ManageCustom/Views/Create.cshtml");
+            var model = new ManageCustomModel();
+            
+            return View("~/Plugins/CustomPoint.ManageCustom/Views/Create.cshtml", model);
         }
 
         [HttpPost]
@@ -76,14 +78,30 @@ namespace Nop.Plugin.CustomPoint.ManageCustom.Controllers
             if (customer == null)
                 return RedirectToAction("List");
 
-            var model = new ManagePointCustom
+            var model = new ManageCustomModel
             {
                 Id = customer.Id,
                 CustomerName = customer.CustomerName,
                 Email = customer.Email,
             };
 
-            return View("~/Plugins/Pickup.PickupInStore/Views/Edit.cshtml", model);
+            return View("~/Plugins/CustomPoint.ManageCustom/Views/Edit.cshtml", model);
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> Edit(ManageCustomModel model)
+        {
+            var customer = await _manageCustomService.GetCustomByIdAsync(model.Id);
+            if (customer == null)
+                return RedirectToAction("List");
+
+            customer.CustomerName = model.CustomerName;
+            customer.Email = model.Email;
+            await _manageCustomService.UpdateCustomAsync(customer);
+
+            ViewBag.RefreshPage = true;
+
+            return View("~/Plugins/CustomPoint.ManageCustom/Views/Edit.cshtml", model);
         }
 
         [HttpPost]

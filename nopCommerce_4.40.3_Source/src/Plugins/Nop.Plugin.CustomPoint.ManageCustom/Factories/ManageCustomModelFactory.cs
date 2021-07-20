@@ -42,6 +42,7 @@ namespace Nop.Plugin.CustomPoint.ManageCustom.Factories
                 {
                     return new ManageCustomModel
                     {
+                        Id = point.Id,
                         CustomerName = point.CustomerName,
                         Email = point.Email
                     };

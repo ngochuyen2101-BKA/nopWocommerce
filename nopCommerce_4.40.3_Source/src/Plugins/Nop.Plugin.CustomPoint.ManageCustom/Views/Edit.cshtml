@@ -3,7 +3,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminPopupLayout.cshtml";
 }
 
-<form asp-controller="PickupInStore" asp-action="ManageCustom">
+<form asp-controller="ManageCustom" asp-action="Edit" method="post" asp-route-btnId="@Context.Request.Query["btnId"]" asp-route-formId="@Context.Request.Query["formId"]">
     <div class="content-header clearfix">
         <h1 class="float-left">
             @T("Edit")
@@ -18,7 +18,7 @@
 
     <div class="content">
         <div class="form-horizontal">
-            @await Html.PartialAsync("~/Plugins/CustomPoint.ManageCustom/Views/_CreateOrUpdate.cshtml")
+            @await Html.PartialAsync("~/Plugins/CustomPoint.ManageCustom/Views/_CreateOrUpdate.cshtml", Model)
         </div>
     </div>
 </form>

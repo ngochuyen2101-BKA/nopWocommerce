@@ -31,23 +31,40 @@
                         },
                         new ColumnProperty(nameof(ManageCustomModel.Id))
                         {
-                            Title = T("Edit").Text,
+                            Title = T("Admin.Common.Edit").Text,
                             ClassName = NopColumnClassDefaults.Button,
                             Width = "100",
                             Render = new RenderCustom("renderColumnEdit")
+                        },
+                        new ColumnProperty(nameof(ManageCustomModel.Id))
+                        {
+                            Title = T("Admin.Common.Delete").Text,
+                            ClassName = NopColumnClassDefaults.Button,
+                            Render = new RenderButtonRemove(T("Admin.Common.Delete").Text),
+                            Width = "100"
                         }
                     }
                 })
             </div>
             <script>
                 function renderColumnEdit(data, type, row, meta) {
-                    return '<button onclick=\"javascript:OpenWindow(\'@Url.Content("~/Admin/PickupInStore/Edit/")' + data + 
-                    ', 800, 800, true); return false;\" class="btn btn-default"><i class="fas fa-pencil-alt"></i>@T("Admin.Common.Edit").Text</button>';
+                    return '<button onclick=\"javascript:OpenWindow(\'@Url.Content("~/Admin/ManageCustom/Edit/")' + data + 
+                    '?btnId=btnRefresh&formId=manage-custom-form\', 800, 800, true); return false;\" class="btn btn-default"><i class="fas fa-pencil-alt"></i>@T("Admin.Common.Edit").Text</button>';
                 }
             </script>
             <div class="card-footer">
-                <button type="submit" id="btnAddNewOption" name="save" class="btn btn-primary" onclick="javascript:OpenWindow('@(Url.Action("Create", "ManageCustom"))', 800, 800, true); return false;">@T("AddNew")</button>
+                <button type="submit" id="btnAddNewOption" name="save" class="btn btn-primary" onclick="javascript:OpenWindow('@(Url.Action("Create", "ManageCustom",  new { btnId = "btnRefresh", formId = "manage-custom-form" }))', 800, 800, true); return false;">@T("AddNew")</button>
+                
+                <button id="btnRefresh" type="submit" name="save" class="btn btn-default" style="display: none"></button>
             </div>
+            <script>
+                $(document).ready(function () {
+                    $('#btnRefresh').click(function () {
+                        updateTable('#custom-grid');
+                        return false;
+                    });
+                });
+            </script>
         </div>
     </div>
 </form>
