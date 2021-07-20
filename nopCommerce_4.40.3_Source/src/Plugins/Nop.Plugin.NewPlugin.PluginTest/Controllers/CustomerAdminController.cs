@@ -18,7 +18,7 @@ namespace Nop.Plugin.NewPlugin.PluginTest.Controllers
         private readonly ICustomerTestService _customerTestService;
         private readonly ICustomerTestFactory _customerTestFactory;
 
-        public CustomerAdminController(ICustomerTestSeervice customerService, ICustomerTestFactory customerTestFactory ) {
+        public CustomerAdminController(ICustomerTestService customerService, ICustomerTestFactory customerTestFactory ) {
             _customerTestService = customerService;
             _customerTestFactory = customerTestFactory;
         }
