@@ -13,6 +13,8 @@ namespace Nop.Core.Domain.Catalog
     /// </summary>
     public partial class Category : BaseEntity, ILocalizedEntity, ISlugSupported, IAclSupported, IStoreMappingSupported, IDiscountSupported<DiscountCategoryMapping>, ISoftDeletedEntity
     {
+        public string SomeNewProperty { get; set; }
+
         /// <summary>
         /// Gets or sets the name
         /// </summary>

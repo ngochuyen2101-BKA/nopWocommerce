@@ -5,7 +5,8 @@ using Nop.Core.Domain.Stores;
 using Nop.Data.Extensions;
 
 namespace Nop.Data.Mapping.Builders.Blogs
-{
+{ 
+    // This is one of files to declare foreign key
     /// <summary>
     /// Represents a blog comment entity builder
     /// </summary>
